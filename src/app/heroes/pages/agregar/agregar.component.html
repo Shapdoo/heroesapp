@@ -1,0 +1,69 @@
+<h1>{{ ( heroe.id ) ? 'Editar' : 'Nuevo' }} Heroe <small>{{ heroe.superhero }}</small></h1>
+
+<div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="column">
+  <div fxFlex="50" fxLayout="column">
+
+    <!-- Campos -->
+    <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column">
+
+      <mat-form-field fxFlex="100" appearance="fill" fxLayout.xs="column">
+        <mat-label>Super Héroe</mat-label>
+        <input matInput required type="text" [(ngModel)]="heroe.superhero">
+      </mat-form-field>
+
+      <mat-form-field fxFlex="100" appearance="fill">
+        <mat-label>Alter Ego</mat-label>
+        <input matInput required type="text" [(ngModel)]="heroe.alter_ego">
+      </mat-form-field>
+
+    </div>
+
+    <mat-form-field fxFlex="100" appearance="fill">
+      <mat-label>Primera Aparición</mat-label>
+      <input matInput required type="text" [(ngModel)]="heroe.first_appearance">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" appearance="fill">
+      <mat-label>Personaje</mat-label>
+      <input matInput required type="text" [(ngModel)]="heroe.characters">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Creador</mat-label>
+      <mat-select  [(ngModel)]="heroe.publisher" required>
+        <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">
+          {{ publisher.desc }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Foto Url</mat-label>
+      <input type="url" matInput required [(ngModel)]="heroe.alt_img">
+    </mat-form-field>
+
+
+
+    <div fxLayout class="buttons">
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        <mat-icon>
+          save
+        </mat-icon>
+         Guardar
+      </button>
+      <button *ngIf="heroe.id" mat-raised-button color="warn" (click)="deleteHero()">
+        <mat-icon>
+          remove
+        </mat-icon>
+        Borrar
+      </button>
+    </div>
+  </div>
+
+
+  <div fxFlex="50">
+    <img [src]="heroe | imagen" alt="">
+  </div>
+</div>
+
+
